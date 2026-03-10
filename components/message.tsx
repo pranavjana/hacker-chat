@@ -179,7 +179,7 @@ const PurePreviewMessage = ({
                  - "output-available"    → tool finished, show the result
                  - "output-denied"       → user denied the tool call
                ============================================================ */}
-            {type === "tool-getWeather" && (() => {
+            if (type === "tool-getWeather") return (() => {
               const { toolCallId, state } = part;
               const approvalId = (part as { approval?: { id: string } })
                 .approval?.id;
@@ -271,14 +271,14 @@ const PurePreviewMessage = ({
                   </Tool>
                 </div>
               );
-            })()}
+            })();
 
-            {/* ==========================================================
+            /* ==========================================================
                WORKSHOP: Add your tool UI rendering here
                ==========================================================
                For each tool you create, add a block like:
 
-               {type === "tool-yourToolName" && (() => {
+               if (type === "tool-yourToolName") return (() => {
                  const { toolCallId, state } = part;
 
                  // Show output when tool is done
@@ -299,11 +299,11 @@ const PurePreviewMessage = ({
                      </ToolContent>
                    </Tool>
                  );
-               })()}
+               })();
 
-               ========================================================== */}
+               ========================================================== */
 
-            {/* If no tool matched, render nothing */}
+            /* If no tool matched, render nothing */
           })}
 
           {!isReadonly && (
